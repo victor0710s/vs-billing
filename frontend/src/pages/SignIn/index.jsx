@@ -1,11 +1,11 @@
-import { LoginForm } from '../../components/Auth/LoginForm'
+import { SignInForm } from '../../components/Auth/SignInForm'
 import { AuthContainer } from '../../components/Auth/AuthContainer'
 
 
-export function Login() {
+export function SignIn() {
   return (
     <AuthContainer>
-      <LoginForm />
+      <SignInForm />
     </AuthContainer>
   )
 }
