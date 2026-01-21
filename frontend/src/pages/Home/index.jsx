@@ -1,5 +1,7 @@
 import { Link } from 'react-router-dom';
 import logo from '../../assets/images/logo.png';
+import TelaTransacoes from '../../assets/images/TelaTransacoes.png';
+import ApresentacaoDash from '../../assets/images/ApresentacaoDash.png';
 
 export function Home() {
   return (
@@ -11,7 +13,7 @@ export function Home() {
           <Link to="/login">
             <button className="bg-sky-900 text-white rounded-md px-4 py-1 text-l font-semibold cursor-pointer transition-all duration-400 ease-in-out hover:bg-emerald-600">Login</button>
           </Link>
-          <Link to="/sign-in" className=''>
+          <Link to="/sign-in">
             <button className="bg-sky-900 text-white rounded-md px-4 py-1 text-l font-semibold cursor-pointer transition-all duration-400 ease-in-out hover:bg-emerald-600">Sign In</button>
           </Link>
         </div>
@@ -29,10 +31,15 @@ export function Home() {
       </section>
 
       {/* FEATURES */}
-      <section className="grid gap-8 px-6 md:grid-cols-3">
-        <div className="rounded-xl bg-neutral-900 p-6">Feature 1. Lorem ipsum dolor sit amet consectetur adipisicing elit. Illo iusto vel aliquam fugiat nemo qui tempora corporis maxime, ullam assumenda recusandae eveniet ad, in deserunt facilis molestias esse eius illum eos nam, molestiae sed inventore tenetur reprehenderit. Voluptatibus laboriosam quae, maiores quisquam repudiandae pariatur omnis, facilis tenetur ratione odio blanditiis quod magni. Modi voluptatum possimus distinctio consequuntur est. Qui fugiat ipsum minima repellendus facere, quas officia illum! Odit qui quam sint ut totam exercitationem quasi nobis repudiandae, consequatur vel. Voluptatibus, culpa rem error repellat itaque necessitatibus fuga nesciunt modi, vitae ad eum distinctio impedit accusamus ea soluta similique aliquid est non quod labore fugiat facilis, dolores asperiores? Quisquam, debitis itaque?</div>
-        <div className="rounded-xl bg-neutral-900 p-6">Feature 2</div>
-        <div className="rounded-xl bg-neutral-900 p-6">Feature 3</div>
+      <section className="flex flex-col md:flex-row gap-8 px-6">
+        <div className="rounded-xl bg-neutral-900 p-6 flex flex-col justify-center items-center">
+          <h1 className="font-bold mb-4">Dashboard contendo informativos gerais</h1>
+          <img src={ApresentacaoDash} alt="Imagem demonstrativa do Dashboard" className="rounded-xl" />
+        </div>
+        <div className="rounded-xl bg-neutral-900 p-6 flex flex-col justify-center items-center">
+          <h1 className="font-bold mb-4">Controle de transações</h1>
+          <img src={TelaTransacoes} alt="Imagem demonstrativa das transações" className="rounded-xl" />
+        </div>
       </section>
 
       {/* CTA */}
