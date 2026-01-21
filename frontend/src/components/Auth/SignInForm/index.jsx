@@ -22,7 +22,7 @@ export function SignInForm() {
     }
 
     try {
-      const response = await fetch("http://localhost:3000/auth/sign-in", {
+      const response = await fetch("http://localhost:3333/auth/sign-in", {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
