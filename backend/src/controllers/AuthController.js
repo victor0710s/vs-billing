@@ -1,4 +1,6 @@
 import CreateUserService from '../services/CreateUserService.js';
+import bcrypt from 'bcrypt';
+import User from '../models/User.js';
 
 class AuthController {
   // Cria a funcao assincrona SignIn que recebe req e res como parametros
@@ -26,6 +28,27 @@ class AuthController {
       return res.status(400).json({
         error: error.message
       });
+    }
+  }
+
+  async login(req, res) {
+    const { email, password } = req.body;
+
+    try {
+      // Lógica de autenticação aqui
+      const user = await User.findByEmail(email);
+      if (!user) {
+        return res.status(401).json({ error: "Email ou senha inválidos" });
+      }
+
+      const passwordMatch = await bcrypt.compare(password, user.passwordHash);
+      if (!passwordMatch) {
+        return res.status(401).json({ error: "Email ou senha inválidos" });
+      }
+
+      return res.status(200).json({ message: `Login bem-sucedido. Seja bem-vindo ${user.name}` });
+    } catch (error) {
+      return res.status(400).json({ error: error.message });
     }
   }
 }

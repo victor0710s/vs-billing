@@ -9,4 +9,7 @@ const authController = new AuthController();
 // Rota POST para /sign-in que chama o metodo signIn do authController
 routes.post('/sign-in', authController.signIn)
 
+// Rota POST para /login que chama o metodo login do authController
+routes.post('/login', authController.login)
+
 export default routes;
