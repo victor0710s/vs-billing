@@ -51,6 +51,22 @@ class AuthController {
       return res.status(400).json({ error: error.message });
     }
   }
+
+  async forgotPass(req, res) {
+    const { email } = req.body;
+
+    try {
+      // Lógica de recuperação de senha aqui
+      // Por enquanto, apenas retornamos uma mensagem de sucesso
+      const user = await User.findByEmail(email);
+      if (!user) {
+        return res.status(404).json({ error: "Email não encontrado" });
+      }
+      return res.status(200).json({ message: `Instruções para recuperação de senha enviadas para ${email}` });
+    } catch (error) {
+      return res.status(400).json({ error: error.message });
+    }
+  }
 }
 
 export default AuthController;

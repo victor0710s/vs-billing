@@ -12,4 +12,7 @@ routes.post('/sign-in', authController.signIn)
 // Rota POST para /login que chama o metodo login do authController
 routes.post('/login', authController.login)
 
+// Rota POST para /forgot-pass (imcompleta, pois falta a logica de recuperacao de senha)
+routes.post('/forgot-pass', authController.forgotPass)
+
 export default routes;

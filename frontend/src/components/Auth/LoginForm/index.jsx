@@ -33,7 +33,7 @@ export function LoginForm() {
         throw new Error(data.error || "Erro ao fazer login");
       }
 
-      navigate("/"); // Somente para teste de login bem-sucedido
+      navigate("/"); //! Somente para teste de login bem-sucedido
     } catch (err) {
       setError(err.message);
     }
