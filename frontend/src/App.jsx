@@ -1,27 +1,36 @@
 import { Routes, Route } from 'react-router-dom';
 import { AuthLayout } from './layout/AuthLayout.jsx';
 import { AppLayout } from './layout/AppLayout.jsx';
-import { Login } from './pages/Login/index.jsx';
-import { Home } from './pages/Home/index.jsx';
-import { SignIn } from './pages/SignIn/index.jsx';
-import { ForgotPass } from './pages/ForgotPass/index.jsx';
-import { Dashboard } from './pages/GeneralDashboard/index.jsx';
+import { PrivateRoute } from '../../backend/src/routes/PrivateRoute.jsx';
+
+import { Login } from './pages/Login';
+import { Home } from './pages/Home';
+import { SignIn } from './pages/SignIn';
+import { ForgotPass } from './pages/ForgotPass';
+import { Dashboard } from './pages/GeneralDashboard';
 
 export default function App() {
   return (
     <Routes>
-      <Route path="/" element={<Home />} /> {/* Home route */}
+      {/* Pública */}
+      <Route path="/" element={<Home />} />
 
+      {/* Auth */}
       <Route element={<AuthLayout />}>
-        <Route path="/login" index element={<Login />} />
+        <Route path="/login" element={<Login />} />
         <Route path="/sign-in" element={<SignIn />} />
         <Route path="/forgot-pass" element={<ForgotPass />} />
       </Route>
 
-      <Route element={<AppLayout />}>
-        {/* Protected routes can be added here */}
-        <Route path="/dashboard" element={<Dashboard />} />
+      {/* Protegida */}
+      <Route element={<PrivateRoute />}>
+        <Route element={<AppLayout />}>
+          <Route path="/dashboard" element={<Dashboard />} />
+          {/* futuras telas */}
+          {/* <Route path="/transactions" element={<Transactions />} /> */}
+          {/* <Route path="/cards" element={<Cards />} /> */}
+        </Route>
       </Route>
     </Routes>
-  )
+  );
 }

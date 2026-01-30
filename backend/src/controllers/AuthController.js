@@ -37,6 +37,10 @@ class AuthController {
     try {
       // Lógica de autenticação aqui
       const user = await User.findByEmail(email);
+      if (!user.emailVerified) {
+        throw new Error("Confirme seu e-mail antes de realizar o login!");
+      }
+
       if (!user) {
         return res.status(401).json({ error: "Email ou senha inválidos" });
       }
