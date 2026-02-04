@@ -7,12 +7,12 @@ const routes = Router();
 const authController = new AuthController();
 
 // Rota POST para /sign-in que chama o metodo signIn do authController
-routes.post('/sign-in', authController.signIn)
+routes.post('/sign-in', authController.signIn.bind(authController));
 
 // Rota POST para /login que chama o metodo login do authController
-routes.post('/login', authController.login)
+// routes.post('/login', authController.login)
 
 // Rota POST para /forgot-pass (imcompleta, pois falta a logica de recuperacao de senha)
-routes.post('/forgot-pass', authController.forgotPass)
+// routes.post('/forgot-pass', authController.forgotPass)
 
 export default routes;

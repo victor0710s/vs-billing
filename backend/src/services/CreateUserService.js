@@ -1,44 +1,48 @@
 import bcrypt from 'bcrypt';
-import crypto from 'crypto';
-import User from '../models/User.js';
+// import crypto from 'crypto';
+import prisma from '../lib/prisma.js';
 
 class CreateUserService {
   // Declara a funcao assincrona execute que recebe um objeto com nome, email e senha
   async execute({ name, email, password }) {
-    // Verifica se o usuario ja existe no banco de dados
-    const userExists = await User.findOne({ email });
-    //Se existir lança um erro
-    if (userExists) {
-      throw new Error("E-mail já cadastrado!");
+    if (!name || !email || !password) {
+      throw new Error("Dados obrigatórios não informados!");
     }
 
-    // Criptografa a senha usando bcrypt
-    // usa 10 rounds de salting para uma segurança adequada (10 é o padrao recomendado)
-    const passwordHash = await bcrypt.hash(password, 10);
+    // Utiliza o metodo findUnique do prisma para encontrar um match entre o email informado e outro inscrito no banco caso exista
+    const userExists = await prisma.users.findUnique({
+      where: { email }
+    })
 
-    const token = crypto.randomBytes(32).toString("hex");
+    if (userExists) {
+      throw new Error("Usuário já existe!")
+    }
+
+    const passwordHash = await bcrypt.hash(password, 10)
 
     // Cria o novo usuario no banco de dados com nome, email e senha criptografada
-    await User.create({
-      name,
-      email,
-      password: passwordHash,
-      emailVerified: false,
-      emailVerificationToken: token,
-      emailVerificationExpires: Date.now() + 1000 * 60 * 60 * 24
+    await prisma.users.create({
+      data: {
+        user_name: name,
+        email: email,
+        passwordHash,
+        emailVerified: false,
+        emailVerificationToken: null,
+        emailVerificationExpires: null
+      }
     });
 
-    const confirmLink = `${process.env.FRONTEND_URL}/confirm-email?token=${token}`;
+    //     const confirmLink = `${process.env.FRONTEND_URL}/confirm-email?token=${token}`;
 
-    await sendEmail({
-      to: email,
-      subject: "Confirme seu e-mail!",
-      html: `
-        <p>Olá ${name},</p>
-        <p>Confirme sua conta clicando no link abaixo:</p>
-        <a href="${confirmLink}">Confirmar e-mail</a>
-      `
-    });
+    //     await sendEmail({
+    //       to: email,
+    //       subject: "Confirme seu e-mail!",
+    //       html: `
+    //         <p>Olá ${name},</p>
+    //         <p>Confirme sua conta clicando no link abaixo:</p>
+    //         <a href="${confirmLink}">Confirmar e-mail</a>
+    //       `
+    //     });
 
   }
 }

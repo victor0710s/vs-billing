@@ -1,0 +1,28 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model transactions {
+  transaction_id   Int      @id @default(autoincrement())
+  user_id          Int
+  type             String   @db.Char(10)
+  amount           Decimal  @db.Decimal
+  transaction_date DateTime @db.Timestamp(6)
+  users            users    @relation(fields: [user_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+}
+
+model users {
+  id                       Int            @id @default(autoincrement())
+  user_name                String         @db.Char(150)
+  email                    String         @unique @db.Char(50)
+  passwordHash             String         @db.Char(200)
+  emailVerified            Boolean        @default(false)
+  emailVerificationToken   String?         @db.Char(200)
+  emailVerificationExpires DateTime?       @db.Date
+  createdat                DateTime?      @db.Date
+  transactions             transactions[]
+}
