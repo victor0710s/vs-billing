@@ -2,8 +2,8 @@ import CreateUserService from '../services/CreateUserService.js';
 import bcrypt from 'bcrypt';
 
 class AuthController {
-  // Cria a funcao assincrona SignIn que recebe req e res como parametros
-  async signIn(req, res) {
+  // Cria a funcao assincrona SignUp que recebe req e res como parametros
+  async signUp(req, res) {
     // Faz unboxing dos valores name, email e password do corpo da requisicao
     const { name, email, password } = req.body;
 

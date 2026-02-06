@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
 
-export function SignInForm() {
+export function SignUpForm() {
   // Cria variaveis de estado para armazenar os valores dos campos do formulario
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");

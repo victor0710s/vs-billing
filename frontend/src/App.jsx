@@ -5,7 +5,7 @@ import { PrivateRoute } from '../../backend/src/routes/PrivateRoute.jsx';
 
 import { Login } from './pages/Login';
 import { Home } from './pages/Home';
-import { SignIn } from './pages/SignIn';
+import { SignUp } from './pages/SignUp';
 import { ForgotPass } from './pages/ForgotPass';
 import { Dashboard } from './pages/GeneralDashboard';
 
@@ -18,7 +18,7 @@ export default function App() {
       {/* Auth */}
       <Route element={<AuthLayout />}>
         <Route path="/login" element={<Login />} />
-        <Route path="/sign-in" element={<SignIn />} />
+        <Route path="/sign-in" element={<SignUp />} />
         <Route path="/forgot-pass" element={<ForgotPass />} />
       </Route>
 

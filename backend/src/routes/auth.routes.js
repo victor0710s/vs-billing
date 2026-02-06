@@ -6,8 +6,8 @@ const routes = Router();
 // Const authController recebe uma nova instancia da class AuthController
 const authController = new AuthController();
 
-// Rota POST para /sign-in que chama o metodo signIn do authController
-routes.post('/sign-in', authController.signIn.bind(authController));
+// Rota POST para /sign-in que chama o metodo signUp do authController
+routes.post('/sign-in', authController.signUp.bind(authController));
 
 // Rota POST para /login que chama o metodo login do authController
 // routes.post('/login', authController.login)
